@@ -1,10 +1,12 @@
 <template>
-  <div class="App">
-    <h1>根组件App</h1>
+  <div class="">
+
+<h1>新增一个标题</h1>
+
+
   </div>
 </template>
 <script setup lang="ts" name="">
-// import {ref,reactive} from "vue"
 
 
 
