@@ -1,20 +1,9 @@
 <template>
   <div class="">
-
-<h1>新增一个标题</h1>
-
-
+    <router-view></router-view>
   </div>
 </template>
-<script setup lang="ts" name="">
-
-
-
-
+<script setup lang="ts">
+// import { ref, reactive } from "vue";
 </script>
-<style lang="" scoped>
-
-
-
-
-</style>
+<style lang="scss" scoped></style>
