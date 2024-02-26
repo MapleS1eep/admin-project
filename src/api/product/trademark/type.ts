@@ -15,7 +15,7 @@ export interface TradeMark {
 }
 
 // 包含全部品牌数据的ts类型
-export type Records = TradeMark[]
+export type Records = Array<TradeMark>
 
 // 获取已有全部品牌数据的ts类型
 export interface TradeMarkResponseData extends ResponseData {
