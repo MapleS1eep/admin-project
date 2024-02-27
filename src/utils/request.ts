@@ -4,8 +4,9 @@ import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 
 // 创建axios实例
+// 基础路径会带上/api
 const request = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径会带上/api
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000 // 超时时间
 })
 
@@ -30,7 +31,7 @@ request.interceptors.response.use(
   (error) => {
     //定义变量存储网络错误的信息
     let message = ''
-    const status = error.response.status
+    const status = error.response?.status
     switch (status) {
       case 401:
         message = 'token已过期'
