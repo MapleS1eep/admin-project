@@ -1,7 +1,7 @@
 <template>
-  <div class="">
-    <h1>SKU管理</h1>
-  </div>
+  <div class=""></div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
+</script>
 <style lang="scss" scoped></style>
