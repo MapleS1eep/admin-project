@@ -43,7 +43,7 @@
       <!-- 分页器组件 -->
       <el-pagination
         @current-change="getHasTrademark"
-        @size-change="getHasTrademark"
+        @size-change="changeSize"
         v-model:current-page="pageNo"
         v-model:page-size="limit"
         :page-sizes="[5, 10, 15, 20]"
@@ -136,6 +136,10 @@ const getHasTrademark = async (page: number = 1) => {
     total.value = result.data.total
     trademarkArr.value = result.data.records
   }
+}
+// 分页器下拉菜单变化触发
+const changeSize = () => {
+  getHasTrademark()
 }
 // 添加品牌
 const addTrademark = () => {

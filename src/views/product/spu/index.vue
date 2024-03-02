@@ -73,7 +73,7 @@
           layout="prev, pager, next, jumper, ->, sizes, total"
           :total="total"
           @current-change="getHasSpu"
-          @size-change="getHasSpu"
+          @size-change="changeSize"
         />
       </div>
       <!-- 添加和修改spu子组件 -->
@@ -156,6 +156,10 @@ const getHasSpu = async (page = 1) => {
     records.value = result.data.records
     total.value = result.data.total
   }
+}
+// 分页器下拉菜单变化触发
+const changeSize = () => {
+  getHasSpu()
 }
 // 添加SPU
 const addSpu = () => {
