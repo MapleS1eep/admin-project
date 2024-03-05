@@ -42,12 +42,17 @@ import useUserStore from '@/store/modules/user'
 // layout配置相关的小仓库
 import useLayoutSettingStore from '@/store/modules/setting'
 import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
 let { menuRoutes } = useUserStore()
 let layoutSettingStore = useLayoutSettingStore()
 let { fold } = storeToRefs(layoutSettingStore)
 
 let $route = useRoute()
+
+onMounted(() => {
+  layoutSettingStore.setTheme()
+})
 </script>
 <script lang="ts">
 export default {

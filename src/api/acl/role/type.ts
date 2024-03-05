@@ -17,7 +17,7 @@ export interface Role {
 export type Records = Array<Role>
 // 获取角色列表接口返回数据的ts类型
 export interface RolesListResponseData extends ResponseData {
-  dataL: {
+  data: {
     records: Records
     total: number
     size: number
@@ -37,7 +37,7 @@ export interface MenuData {
   type: number
   status: null
   level: number
-  children?: MenuArr
+  children: MenuArr
   select: boolean
 }
 export type MenuArr = Array<MenuData>

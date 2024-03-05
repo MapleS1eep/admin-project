@@ -228,7 +228,7 @@ const updateRole = (row: Role) => {
   formRef.value.clearValidate()
 }
 // 校验的方法
-const validateRoleName = (rule: any, value: any, callback: any) => {
+const validateRoleName = (_rule: any, value: any, callback: any) => {
   if (value.trim().length >= 2) {
     callback()
   } else {
@@ -242,33 +242,33 @@ const rules = {
 // 添加或修改的保存按钮
 const save = async () => {
   await formRef.value.validate()
-  const result = await reqAddOrUpdateRole(roleParams.value)
+  const result = await reqAddOrUpdateRole(roleParams)
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: roleParams.value.id ? '修改成功' : '添加成功'
+      message: roleParams.id ? '修改成功' : '添加成功'
     })
     dialogFormVisible.value = false
-    getRolesList(roleParams.value.id ? pageNo.value : 1)
+    getRolesList(roleParams.id ? pageNo.value : 1)
   } else {
     ElMessage({
       type: 'success',
-      message: roleParams.value.id ? '修改失败' : '添加失败'
+      message: roleParams.id ? '修改失败' : '添加失败'
     })
   }
 }
 // 分配权限按钮
 const setPermission = async (row: Role) => {
-  drawerVisible.value = true
   Object.assign(roleParams, row)
-  const result = await reqAllPermission(roleParams.id)
+  const result = await reqAllPermission(roleParams.id!)
   if (result.code == 200) {
     menuList.value = result.data
+    drawerVisible.value = true
     defaultCheckedKeys.value = filterSelectArr(result.data, [])
   }
 }
 // 递归查找默认勾选的子节点
-const filterSelectArr = (arr: MenuArr, initArr: Array) => {
+const filterSelectArr = (arr: MenuArr, initArr: Array<number>) => {
   arr.forEach((item: MenuData) => {
     if (item.select && item.children.length == 0) {
       initArr.push(item.id)
@@ -290,7 +290,7 @@ const confirmClick = async () => {
   // 组合参数
   const permissionId = checkedKeys.concat(halfCheckedKeys)
   // 发送请求
-  const result = await reqSetPermission(roleId, permissionId)
+  const result = await reqSetPermission(roleId!, permissionId)
   if (result.code == 200) {
     ElMessage({ type: 'success', message: '权限分配成功' })
     drawerVisible.value = false
@@ -302,7 +302,7 @@ const confirmClick = async () => {
 }
 // 点击删除角色
 const deleteRole = async (row: Role) => {
-  const result = await reqDeleteRole(row.id)
+  const result = await reqDeleteRole(row.id!)
   if (result.code == 200) {
     ElMessage({ type: 'success', message: '删除成功' })
     getRolesList(rolesList.value.length > 1 ? pageNo.value : pageNo.value - 1)

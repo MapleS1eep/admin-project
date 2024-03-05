@@ -264,7 +264,7 @@ const addUser = () => {
 const updateUser = (row: User) => {
   userDrawer.value = true
   Object.assign(userParams, row)
-  formRef.value.clearValidate()
+  formRef.value?.clearValidate()
 }
 // 抽屉点击确认发送请求
 const save = async () => {

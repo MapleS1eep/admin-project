@@ -1,6 +1,6 @@
 // 角色管理相关的接口
 import request from '@/utils/request'
-import type { RolesListResponseData, Role } from './type'
+import type { RolesListResponseData, Role, MenuResponseData } from './type'
 enum API {
   // 获取角色分页列表
   ROLES_LIST_URL = '/admin/acl/role/',

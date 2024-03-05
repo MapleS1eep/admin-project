@@ -9,21 +9,21 @@
 defineProps({
   prefix: {
     type: String,
-    default: "#icon-",
+    default: '#icon-'
   },
   name: String,
   color: {
     type: String,
-    default: "blue",
+    default: 'blue'
   },
   width: {
     type: String,
-    default: "16px",
+    default: '16px'
   },
   height: {
     type: String,
-    default: "16px",
-  },
-});
+    default: '16px'
+  }
+})
 </script>
 <style lang="scss" scoped></style>

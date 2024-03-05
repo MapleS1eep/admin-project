@@ -5,6 +5,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 // 引入全局样式
 import '@/styles/index.scss'
+// 暗黑模式样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 // 全局配置国际化
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // svg插件需要配置代码
