@@ -47,4 +47,4 @@ export const reqDeleteUser = (userId: number) =>
   request.delete<any, any>(API.DELETE_USER_URL + userId)
 // 批量删除用户的请求方法
 export const reqBatchDeleteUser = (idList: Array<number>) =>
-  request.delete(API.BATCH_DELETE_USER_URL, { data: idList })
+  request.delete<any, any>(API.BATCH_DELETE_USER_URL, { data: idList })

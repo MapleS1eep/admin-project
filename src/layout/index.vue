@@ -43,8 +43,10 @@ import useUserStore from '@/store/modules/user'
 import useLayoutSettingStore from '@/store/modules/setting'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
-
-let { menuRoutes } = useUserStore()
+// 获取菜单数据
+let userStore = useUserStore()
+let { menuRoutes } = storeToRefs(userStore)
+// 获取折叠数据
 let layoutSettingStore = useLayoutSettingStore()
 let { fold } = storeToRefs(layoutSettingStore)
 

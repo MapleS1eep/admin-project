@@ -10,6 +10,7 @@
           icon="Plus"
           :disabled="!c3Id"
           @click="addAttr"
+          v-has="'btn.Attr.add'"
         >
           添加属性
         </el-button>
@@ -39,6 +40,7 @@
                 icon="Edit"
                 size="small"
                 @click="updateAttr(row)"
+                v-has="'btn.Attr.update'"
               ></el-button>
               <el-popconfirm
                 width="200"
@@ -50,6 +52,7 @@
                     type="danger"
                     icon="Delete"
                     size="small"
+                    v-has="'btn.Attr.remove'"
                   ></el-button>
                 </template>
               </el-popconfirm>

@@ -1,4 +1,4 @@
-//  对外暴露配置的路由(常量路由)
+//  对外暴露配置的路由(常量路由), 所有用户都可以访问
 export const constantRoutes = [
   {
     // 登录
@@ -43,6 +43,21 @@ export const constantRoutes = [
       icon: 'Monitor'
     }
   },
+  {
+    // 404
+    path: '/404',
+    component: () => import('@/views/404/index.vue'),
+    name: '404',
+    meta: {
+      title: '404',
+      hidden: true,
+      icon: 'Loading'
+    }
+  }
+]
+
+// 异步路由
+export const asyncRoutes = [
   {
     // 权限管理
     path: '/acl',
@@ -139,18 +154,10 @@ export const constantRoutes = [
         }
       }
     ]
-  },
-  {
-    // 404
-    path: '/404',
-    component: () => import('@/views/404/index.vue'),
-    name: '404',
-    meta: {
-      title: '404',
-      hidden: true,
-      icon: 'Loading'
-    }
-  },
+  }
+]
+
+export const anyRoutes = [
   {
     // 任意路由
     path: '/:pathMatch(.*)*',

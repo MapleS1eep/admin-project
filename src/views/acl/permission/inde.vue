@@ -1,70 +1,79 @@
 <template>
-  <el-table class="table" :data="permissionList" row-key="id" border>
-    <el-table-column label="名称" prop="name"></el-table-column>
-    <el-table-column label="权限值" prop="code"></el-table-column>
-    <el-table-column label="修改时间" prop="updateTime"></el-table-column>
-    <el-table-column label="操作">
-      <template #="{ row }">
-        <el-button
-          type="primary"
-          size="small"
-          :disabled="row.level == 4"
-          @click="addPermission(row)"
-        >
-          {{ row.level == 3 ? '添加功能' : '添加菜单' }}
-        </el-button>
-        <el-button
-          type="primary"
-          size="small"
-          :disabled="row.level == 1"
-          @click="updatePermission(row)"
-        >
-          编辑
-        </el-button>
-        <el-popconfirm
-          width="200"
-          confirm-button-text="确定"
-          cancel-button-text="取消"
-          icon="InfoFilled"
-          icon-color="red"
-          :title="`确定要删除${row.name}吗？`"
-          @confirm="deletePermission(row)"
-        >
-          <template #reference>
-            <el-button type="primary" size="small" :disabled="row.level == 1">
-              删除
-            </el-button>
-          </template>
-        </el-popconfirm>
-      </template>
-    </el-table-column>
-  </el-table>
-  <!-- 添加和编辑的对话框 -->
-  <el-dialog
-    v-model="dialogVisible"
-    :title="menuParams.id ? '更新菜单' : '添加菜单'"
-    width="400"
-  >
-    <el-form
-      :model="menuParams"
-      :rules="rules"
-      ref="formRef"
-      label-width="auto"
+  <div>
+    <el-table class="table" :data="permissionList" row-key="id" border>
+      <el-table-column label="名称" prop="name"></el-table-column>
+      <el-table-column label="权限值" prop="code"></el-table-column>
+      <el-table-column label="修改时间" prop="updateTime"></el-table-column>
+      <el-table-column label="操作">
+        <template #="{ row }">
+          <el-button
+            type="primary"
+            size="small"
+            :disabled="row.level == 4"
+            @click="addPermission(row)"
+            v-has="'btn.Permission.add'"
+          >
+            {{ row.level == 3 ? '添加功能' : '添加菜单' }}
+          </el-button>
+          <el-button
+            type="primary"
+            size="small"
+            :disabled="row.level == 1"
+            @click="updatePermission(row)"
+            v-has="'btn.Permission.update'"
+          >
+            编辑
+          </el-button>
+          <el-popconfirm
+            width="200"
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            icon="InfoFilled"
+            icon-color="red"
+            :title="`确定要删除${row.name}吗？`"
+            @confirm="deletePermission(row)"
+          >
+            <template #reference>
+              <el-button
+                type="primary"
+                size="small"
+                :disabled="row.level == 1"
+                v-has="'btn.Permission.delete'"
+              >
+                删除
+              </el-button>
+            </template>
+          </el-popconfirm>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 添加和编辑的对话框 -->
+    <el-dialog
+      v-model="dialogVisible"
+      :title="menuParams.id ? '更新菜单' : '添加菜单'"
+      width="400"
     >
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="menuParams.name" />
-      </el-form-item>
-      <el-form-item label="权限值" prop="code">
-        <el-input v-model="menuParams.code" />
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="save">确定</el-button>
-      </div>
-    </template>
-  </el-dialog>
+      <el-form
+        :model="menuParams"
+        :rules="rules"
+        ref="formRef"
+        label-width="auto"
+      >
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="menuParams.name" />
+        </el-form-item>
+        <el-form-item label="权限值" prop="code">
+          <el-input v-model="menuParams.code" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="save">确定</el-button>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'

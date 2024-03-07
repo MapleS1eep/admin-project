@@ -19,8 +19,13 @@ import router from './router'
 import pinia from '@/store'
 // 引入路由鉴权文件
 import './permission'
+// 引入自定义指令文件
+import directives from './directives'
 
 const app = createApp(App)
+
+// 安装指令
+app.use(directives)
 // 安装element-plus插件
 app.use(ElementPlus, {
   locale: zhCn

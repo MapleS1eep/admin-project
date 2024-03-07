@@ -40,18 +40,21 @@
             :icon="row.isSale == 1 ? 'Bottom' : 'Top'"
             @click="updateSale(row)"
             size="small"
+            v-has="'btn.Sku.updown'"
           ></el-button>
           <el-button
             type="primary"
             icon="Edit"
             size="small"
             @click="updateSku"
+            v-has="'btn.Sku.update'"
           ></el-button>
           <el-button
             type="info"
             icon="InfoFilled"
             size="small"
             @click="viewSkuInfo(row)"
+            v-has="'btn.Sku.detail'"
           ></el-button>
           <el-popconfirm
             confirm-button-text="确定"
@@ -63,7 +66,12 @@
             width="200"
           >
             <template #reference>
-              <el-button type="danger" icon="Delete" size="small"></el-button>
+              <el-button
+                type="danger"
+                icon="Delete"
+                size="small"
+                v-has="'btn.Sku.remove'"
+              ></el-button>
             </template>
           </el-popconfirm>
         </template>

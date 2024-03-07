@@ -1,23 +1,25 @@
 <template>
-  <!-- 左侧图标 -->
-  <el-icon @click="changeIcon">
-    <component :is="fold ? 'Expand' : 'Fold'"></component>
-  </el-icon>
-  <!-- 左侧面包屑 -->
-  <el-breadcrumb separator-icon="ArrowRight">
-    <!-- 面包屑动态展示路由的名字和标题 -->
-    <el-breadcrumb-item
-      v-for="(item, index) in $route.matched"
-      :key="index"
-      v-show="item.meta.title"
-      :to="item.path"
-    >
-      <el-icon>
-        <component :is="item.meta.icon" />
-      </el-icon>
-      <span>{{ item.meta.title }}</span>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+  <div>
+    <!-- 左侧图标 -->
+    <el-icon @click="changeIcon">
+      <component :is="fold ? 'Expand' : 'Fold'"></component>
+    </el-icon>
+    <!-- 左侧面包屑 -->
+    <el-breadcrumb separator-icon="ArrowRight">
+      <!-- 面包屑动态展示路由的名字和标题 -->
+      <el-breadcrumb-item
+        v-for="(item, index) in $route.matched"
+        :key="index"
+        v-show="item.meta.title"
+        :to="item.path"
+      >
+        <el-icon>
+          <component :is="item.meta.icon" />
+        </el-icon>
+        <span>{{ item.meta.title }}</span>
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
 </template>
 <script setup lang="ts">
 import useLayoutSettingStore from '@/store/modules/setting'

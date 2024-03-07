@@ -35,7 +35,9 @@ router.beforeEach(async (to: any, _from: any, next: any) => {
         // 没有用户信息，先发送请求获取到用户信息之后再放行
         try {
           await userStore.userInfo()
-          next()
+          // 访问异步路由时，已获取到用户信息，但路由还没加载完，next()会直接放行从而匹配不到
+          // 解决: ...to
+          next({ ...to })
         } catch (error) {
           // token过期获取不到用户信息或者用户手动修改了本地token
           // 退出登录：清空用户相关数据
@@ -54,7 +56,7 @@ router.beforeEach(async (to: any, _from: any, next: any) => {
   }
 })
 // 全局后置守卫
-router.afterEach((to: any, from: any) => {
+router.afterEach((_to: any, _from: any) => {
   nprogress.done()
 })
 

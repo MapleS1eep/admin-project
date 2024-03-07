@@ -1,148 +1,161 @@
 <template>
-  <el-card>
-    <el-form inline>
-      <el-form-item label="角色名称">
-        <el-input placeholder="角色名称" v-model="keyword"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          type="primary"
-          :disabled="!keyword.trim().length"
-          @click="search"
-        >
-          搜索
-        </el-button>
-        <el-button @click="reset">重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
-  <el-card>
-    <el-button
-      type="primary"
-      icon="Plus"
-      style="margin-bottom: 10px"
-      @click="addRole"
-    >
-      添加角色
-    </el-button>
-    <el-table show-overflow-tooltip border :data="rolesList">
-      <el-table-column
-        label="#"
-        type="index"
-        align="center"
-        width="80"
-      ></el-table-column>
-      <el-table-column
-        label="ID"
-        width="120"
-        align="center"
-        prop="id"
-      ></el-table-column>
-      <el-table-column
-        label="角色名称"
-        align="center"
-        prop="roleName"
-      ></el-table-column>
-      <el-table-column
-        label="创建时间"
-        align="center"
-        prop="createTime"
-      ></el-table-column>
-      <el-table-column
-        label="更新时间"
-        align="center"
-        prop="updateTime"
-      ></el-table-column>
-      <el-table-column label="操作" fixed="right" width="300">
-        <template #="{ row }">
+  <div>
+    <el-card>
+      <el-form inline>
+        <el-form-item label="角色名称">
+          <el-input placeholder="角色名称" v-model="keyword"></el-input>
+        </el-form-item>
+        <el-form-item>
           <el-button
             type="primary"
-            size="small"
-            icon="User"
-            @click="setPermission(row)"
+            :disabled="!keyword.trim().length"
+            @click="search"
           >
-            分配权限
+            搜索
           </el-button>
-          <el-button
-            type="primary"
-            size="small"
-            icon="Edit"
-            @click="updateRole(row)"
-          >
-            编辑
-          </el-button>
-          <el-popconfirm
-            width="200"
-            confirm-button-text="确定"
-            cancel-button-text="取消"
-            icon="InfoFilled"
-            icon-color="red"
-            :title="`确定要删除${row.roleName}?`"
-            @confirm="deleteRole(row)"
-          >
-            <template #reference>
-              <el-button type="primary" size="small" icon="Delete">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      v-model:current-page="pageNo"
-      v-model:page-size="pageSize"
-      :page-sizes="[10, 15, 20, 25]"
-      :background="true"
-      layout="prev, pager, next, jumper, ->, sizes, total"
-      :total="total"
-      @current-change="getRolesList"
-      @size-change="handleSizeChange"
-    />
-  </el-card>
-  <!-- 添加和修改角色的弹窗 -->
-  <el-dialog
-    v-model="dialogFormVisible"
-    :title="roleParams.id ? '添加角色' : '修改角色'"
-    width="500"
-  >
-    <el-form :model="roleParams" :rules="rules" ref="formRef">
-      <el-form-item label="角色名称" prop="roleName">
-        <el-input v-model="roleParams.roleName" placeholder="请输入角色名称" />
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="save">确定</el-button>
-      </div>
-    </template>
-  </el-dialog>
-  <!-- 分配权限的抽屉 -->
-  <el-drawer v-model="drawerVisible">
-    <template #header>
-      <h4>分配权限</h4>
-    </template>
-    <template #default>
-      <!-- 树形控件展示权限 -->
-      <el-tree
-        ref="treeRef"
-        style="max-width: 600px"
-        :data="menuList"
-        show-checkbox
-        node-key="id"
-        default-expand-all
-        :default-checked-keys="defaultCheckedKeys"
-        :props="defaultProps"
+          <el-button @click="reset">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card>
+      <el-button
+        type="primary"
+        icon="Plus"
+        style="margin-bottom: 10px"
+        @click="addRole"
+        v-has="'btn.Role.add'"
+      >
+        添加角色
+      </el-button>
+      <el-table show-overflow-tooltip border :data="rolesList">
+        <el-table-column
+          label="#"
+          type="index"
+          align="center"
+          width="80"
+        ></el-table-column>
+        <el-table-column
+          label="ID"
+          width="120"
+          align="center"
+          prop="id"
+        ></el-table-column>
+        <el-table-column
+          label="角色名称"
+          align="center"
+          prop="roleName"
+        ></el-table-column>
+        <el-table-column
+          label="创建时间"
+          align="center"
+          prop="createTime"
+        ></el-table-column>
+        <el-table-column
+          label="更新时间"
+          align="center"
+          prop="updateTime"
+        ></el-table-column>
+        <el-table-column label="操作" fixed="right" width="300">
+          <template #="{ row }">
+            <el-button
+              type="primary"
+              size="small"
+              icon="User"
+              @click="setPermission(row)"
+              v-has="'btn.Role.assign'"
+            >
+              分配权限
+            </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              icon="Edit"
+              @click="updateRole(row)"
+              v-has="'btn.Role.update'"
+            >
+              编辑
+            </el-button>
+            <el-popconfirm
+              width="200"
+              confirm-button-text="确定"
+              cancel-button-text="取消"
+              icon="InfoFilled"
+              icon-color="red"
+              :title="`确定要删除${row.roleName}?`"
+              @confirm="deleteRole(row)"
+            >
+              <template #reference>
+                <el-button
+                  type="primary"
+                  size="small"
+                  icon="Delete"
+                  v-has="'btn.Role.remove'"
+                >
+                  删除
+                </el-button>
+              </template>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        v-model:current-page="pageNo"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 15, 20, 25]"
+        :background="true"
+        layout="prev, pager, next, jumper, ->, sizes, total"
+        :total="total"
+        @current-change="getRolesList"
+        @size-change="handleSizeChange"
       />
-    </template>
-    <template #footer>
-      <div style="flex: auto">
-        <el-button @click="drawerVisible = false">取消</el-button>
-        <el-button type="primary" @click="confirmClick">确定</el-button>
-      </div>
-    </template>
-  </el-drawer>
+    </el-card>
+    <!-- 添加和修改角色的弹窗 -->
+    <el-dialog
+      v-model="dialogFormVisible"
+      :title="roleParams.id ? '添加角色' : '修改角色'"
+      width="500"
+    >
+      <el-form :model="roleParams" :rules="rules" ref="formRef">
+        <el-form-item label="角色名称" prop="roleName">
+          <el-input
+            v-model="roleParams.roleName"
+            placeholder="请输入角色名称"
+          />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取消</el-button>
+          <el-button type="primary" @click="save">确定</el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- 分配权限的抽屉 -->
+    <el-drawer v-model="drawerVisible">
+      <template #header>
+        <h4>分配权限</h4>
+      </template>
+      <template #default>
+        <!-- 树形控件展示权限 -->
+        <el-tree
+          ref="treeRef"
+          style="max-width: 600px"
+          :data="menuList"
+          show-checkbox
+          node-key="id"
+          default-expand-all
+          :default-checked-keys="defaultCheckedKeys"
+          :props="defaultProps"
+        />
+      </template>
+      <template #footer>
+        <div style="flex: auto">
+          <el-button @click="drawerVisible = false">取消</el-button>
+          <el-button type="primary" @click="confirmClick">确定</el-button>
+        </div>
+      </template>
+    </el-drawer>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'

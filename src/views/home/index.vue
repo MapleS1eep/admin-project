@@ -1,15 +1,17 @@
 <template>
-  <el-card>
-    <div class="box">
-      <img :src="avatar" class="avatar" />
-      <div>
-        <h3 class="title">{{ getTime() }}好，{{ username }}</h3>
-        <p class="subtitle">后台管理运营平台</p>
+  <div>
+    <el-card>
+      <div class="box">
+        <img :src="avatar" class="avatar" />
+        <div>
+          <h3 class="title">{{ getTime() }}好，{{ username }}</h3>
+          <p class="subtitle">后台管理运营平台</p>
+        </div>
       </div>
+    </el-card>
+    <div class="bottom">
+      <svg-icon name="welcome" width="600px" height="300px"></svg-icon>
     </div>
-  </el-card>
-  <div class="bottom">
-    <svg-icon name="welcome" width="600px" height="300px"></svg-icon>
   </div>
 </template>
 <script setup lang="ts">
@@ -18,7 +20,7 @@ import { storeToRefs } from 'pinia'
 import useUserStore from '@/store/modules/user'
 import { getTime } from '@/utils/time'
 const userStore = useUserStore()
-const { username, avatar } = userStore
+const { username, avatar } = storeToRefs(userStore)
 </script>
 <style lang="scss" scoped>
 .box {

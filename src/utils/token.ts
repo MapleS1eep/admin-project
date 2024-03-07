@@ -2,6 +2,8 @@
 export const SET_TOKEN = (token: string) => {
   localStorage.setItem('TOKEN', token)
 }
-export const GET_TOKEN = () => localStorage.getItem('TOKEN')
+export const GET_TOKEN = (): string => localStorage.getItem('TOKEN') || ''
 // 删除本地存储数据的方法
-export const REMOVE_TOKEN = () => localStorage.removeItem('TOKEN')
+export const REMOVE_TOKEN = () => {
+  localStorage.removeItem('TOKEN')
+}

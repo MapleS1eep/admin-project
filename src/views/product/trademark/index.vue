@@ -2,7 +2,12 @@
   <div>
     <el-card>
       <!-- 卡片顶部按钮 -->
-      <el-button type="primary" icon="Plus" @click="addTrademark">
+      <el-button
+        type="primary"
+        icon="Plus"
+        @click="addTrademark"
+        v-has="'btn.Trademark.add'"
+      >
         添加品牌
       </el-button>
       <!-- 表格组件 -->
@@ -25,6 +30,7 @@
               type="warning"
               icon="Edit"
               @click="updateTrademark(row)"
+              v-has="'btn.Trademark.update'"
             ></el-button>
             <el-popconfirm
               :title="`您确定要删除${row.tmName}吗？`"
@@ -34,7 +40,11 @@
               @confirm="removeTrademark(row.id)"
             >
               <template #reference>
-                <el-button type="danger" icon="Delete"></el-button>
+                <el-button
+                  type="danger"
+                  icon="Delete"
+                  v-has="'btn.Trademark.remove'"
+                ></el-button>
               </template>
             </el-popconfirm>
           </template>

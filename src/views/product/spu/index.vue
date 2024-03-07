@@ -4,7 +4,13 @@
     <el-card>
       <!-- v-if和v-show都能控制组件显示隐藏，但v-if会销毁重建，需频繁切换时性能开销较大，v-show原理是display属性 -->
       <div v-show="type == 0">
-        <el-button type="primary" icon="Plus" :disabled="!c3Id" @click="addSpu">
+        <el-button
+          type="primary"
+          icon="Plus"
+          :disabled="!c3Id"
+          @click="addSpu"
+          v-has="'btn.Spu.add'"
+        >
           添加SPU
         </el-button>
         <!-- 展示已有SPU数据 -->
@@ -29,6 +35,7 @@
                 icon="Plus"
                 title="添加SKU"
                 @click="addSku(row)"
+                v-has="'btn.Spu.addsku'"
               ></el-button>
               <el-button
                 type="warning"
@@ -36,6 +43,7 @@
                 icon="Edit"
                 title="修改SPU"
                 @click="updateSpu(row)"
+                v-has="'btn.Spu.update'"
               ></el-button>
               <el-button
                 type="info"
@@ -43,6 +51,7 @@
                 icon="View"
                 title="查看SKU列表"
                 @click="viewSku(row)"
+                v-has="'btn.Spu.skus'"
               ></el-button>
               <el-popconfirm
                 width="220"
@@ -59,6 +68,7 @@
                     size="small"
                     icon="Delete"
                     title="删除SPU"
+                    v-has="'btn.Spu.delete'"
                   ></el-button>
                 </template>
               </el-popconfirm>
