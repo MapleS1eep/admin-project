@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        background: url('./bg.jpg') no-repeat;
+        background-size: cover;
+      }
+      .box {
+        position: fixed;
+        width: 1920px;
+        height: 1080px;
+        background-color: hsl(80, 61%, 50%);
+        transform-origin: left top;
+        left: 50%;
+        top: 50%;
+      }
+      .top {
+        width: 100px;
+        height: 100px;
+        background-color: hotpink;
+        margin-left: 50px;
+      }
+      .bottom {
+        width: 100px;
+        height: 100px;
+        background-color: gold;
+        margin-left: 50px;
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="top">第一个</div>
+        <div class="bottom">第二个</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // 控制大屏的放大与缩小
+  let box = document.querySelector('.box')
+  box.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
+  // 计算缩放比例
+  function getScale(w = 1920, h = 1080) {
+    let wScale = window.innerWidth / w
+    let hScale = window.innerHeight / h
+
+    return wScale < hScale ? wScale : hScale
+  }
+  // 浏览器窗口发生变化时触发
+  window.onresize = () => {
+    box.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
+  }
+</script>
