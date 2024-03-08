@@ -62,7 +62,7 @@
               size="small"
               icon="User"
               @click="setPermission(row)"
-              v-has="'btn.Role.assign'"
+              v-has="'btn.Role.assgin'"
             >
               分配权限
             </el-button>

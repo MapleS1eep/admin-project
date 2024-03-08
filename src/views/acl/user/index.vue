@@ -75,7 +75,7 @@
               icon="User"
               size="small"
               @click="setRole(row)"
-              v-has="'btn.User.assign'"
+              v-has="'btn.User.assgin'"
             >
               分配角色
             </el-button>
